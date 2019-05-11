@@ -1,0 +1,8 @@
+0100|WELCOME|Los gehts!
+0201|NEW_CARD|Eine neue Karte wurde erkannt. Bitte lasse die Karte auf der Box liegen, bis die Karte konfiguriert ist. Du kannst jetzt mit Grün und Blau ein Hörspiel auswählen und mit Rot bestätigen.
+0202|CARD_WRITE_ERROR|Beim beschreiben der Karte ging etwas schief.
+0203|CARD_WRITE_SUCCESS|Die Karte wurde erfolgreich eingerichtet.
+0204|CARD_WRITE_ABORT|Kartenkonfiguration abgebrochen.
+0205|CARD_DELETE_MODE|Lege die Karte auf die gelöscht werden soll.
+0206|CARD_DELETE_SUCCESS|Karte wurde gelöscht.
+0207|CARD_READ_ERROR|Beim lesen der Karte ist ein Fehler aufgetreten.
