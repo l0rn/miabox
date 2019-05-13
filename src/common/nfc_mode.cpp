@@ -7,9 +7,7 @@
 using namespace nfc;
 
 namespace nfc_mode {
-    struct nfc_mode {
-        void (*loop)();
-    } current= {
+    nfc_mode current = {
         // default mode is card read
         .loop = card_read_mode::loop
     };

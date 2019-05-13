@@ -6,3 +6,12 @@
 0205|CARD_DELETE_MODE|Lege die Karte auf die gelöscht werden soll.
 0206|CARD_DELETE_SUCCESS|Karte wurde gelöscht.
 0207|CARD_READ_ERROR|Beim lesen der Karte ist ein Fehler aufgetreten.
+0300|DRUMSET_MODE_START|Schlagzeugmodus.
+0400|SIMON_SAYS_START|Farborakel modus.
+0401|SIMON_RED|Rot.
+0402|SIMON_BLUE|Blau.
+0403|SIMON_YELLOW|Gelb.
+0404|SIMON_GREEN|Grün.
+0405|SIMON_WHITE|Weiß.
+0406|SIMON_LOST|Das war leider falsch. Von vorne..
+0407|SIMON_CORRECT|Richtig!

@@ -4,6 +4,10 @@
 
 
 namespace nfc_mode {
+    typedef struct nfc_mode {
+        void (*loop)();
+    };
+    extern nfc_mode current;
     void change(void (*loop)());
     void loop();
 }

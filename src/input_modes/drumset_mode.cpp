@@ -14,39 +14,35 @@ namespace drumset_mode {
     void handleRed(AceButton *, uint8_t eventType, uint8_t) {
         switch (eventType) {
             case AceButton::kEventPressed:
-                Serial.println("Play Kick");
-                player.playFolderTrack(3, 1);
-            case AceButton::kEventReleased:
-                Serial.println("Red released");
+                player.playFolderTrack(KICK_SOUND);
         }
     }
 
     void handleBlue(AceButton *, uint8_t eventType, uint8_t) {
         switch (eventType) {
             case AceButton::kEventPressed:
-                Serial.println("Play Snare");
-                player.playFolderTrack(3, 2);
-            case AceButton::kEventReleased:
-                Serial.println("Blue released");
+                player.playFolderTrack(SNARE_SOUND);
         }
     }
 
     void handleYellow(AceButton *, uint8_t eventType, uint8_t) {
         switch (eventType) {
             case AceButton::kEventPressed:
-                Serial.println("Yellow pressed");
-            case AceButton::kEventReleased:
-                Serial.println("Yellow released");
+                player.playFolderTrack(HIHAT_SOUND);
         }
     }
 
     void handleGreen(AceButton *, uint8_t eventType, uint8_t) {
         switch (eventType) {
             case AceButton::kEventPressed:
-                Serial.println("Play Hi-Hat");
-                player.playFolderTrack(3, 3);
-            case AceButton::kEventReleased:
-                Serial.println("Green released");
+                player.playFolderTrack(TOM_SOUND);
+        }
+    }
+
+    void handleWhite(AceButton *, uint8_t eventType, uint8_t) {
+        switch (eventType) {
+            case AceButton::kEventPressed:
+                player.playFolderTrack(CLAP_SOUND);
         }
     }
 
@@ -55,7 +51,8 @@ namespace drumset_mode {
             handleRed,
             handleBlue,
             handleYellow,
-            handleGreen
+            handleGreen,
+            handleWhite
         );
     }
 
