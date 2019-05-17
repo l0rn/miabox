@@ -4,6 +4,7 @@
 #include "../common/input_mode.h"
 #include "../common/mp3.h"
 #include "../common/nfc.h"
+#include "../common/debug.h"
 #include "card_select_mode.h"
 
 InputHandler *handler;
@@ -56,7 +57,7 @@ namespace card_select_mode {
         if (success) {
             mp3::playMessageBlocking(CARD_WRITE_SUCCESS);
         } else {
-            Serial.println(F("Card write error"));
+            DEBUG_PRINT(F("Card write error"));
             mp3::playMessageBlocking(CARD_WRITE_ERROR);
         }
         nfc::closeTagConnection();

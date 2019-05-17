@@ -3,6 +3,7 @@
 #include "../classes/InputHandler.h"
 #include "../assets/Assets.h"
 #include "../common/mp3.h"
+#include "../common/debug.h"
 #include "../common/input_mode.h"
 
 using namespace ace_button;
@@ -24,9 +25,9 @@ namespace simon_says_mode {
 
 
     void input(uint8_t buttonPin) {
-        Serial.print("User pointer is: "); Serial.println(userPointer);
-        Serial.print("Expected simon value is: "); Serial.println(simonSays[userPointer]);
-        Serial.print("Input is: "); Serial.println(buttonPin);
+        DEBUG_PRINT("User pointer is: "); DEBUG_PRINT(userPointer);
+        DEBUG_PRINT("Expected simon value is: "); DEBUG_PRINT(simonSays[userPointer]);
+        DEBUG_PRINT("Input is: "); DEBUG_PRINT(buttonPin);
         if (buttonPin == simonSays[userPointer]) {
             if (userPointer == (round - 1)) {
                 mp3::playMessageBlocking(SIMON_CORRECT);
@@ -50,7 +51,7 @@ namespace simon_says_mode {
     void handle(AceButton* button, uint8_t eventType, uint8_t) {
         switch (eventType) {
             case AceButton::kEventPressed:
-                Serial.print("Pressed: "); Serial.println(button->getPin());
+                DEBUG_PRINT("Pressed: "); DEBUG_PRINT(button->getPin());
                 input(button->getPin());
         }
     }
@@ -68,7 +69,7 @@ namespace simon_says_mode {
     void nextRound() {
         inputLocked = true;
         userPointer = 0;
-        simonSays[round] = buttonPins[random(0,4)];
+        simonSays[round] = buttonPins[random(0,5)];
         for (uint16_t i = 0; i <= round; i++) {
             mp3::playMessageBlocking(getMessage(simonSays[i]));
         }

@@ -1,0 +1,2 @@
+#define JONNI_CORRECT 901
+#define JONNI_FALSE 902

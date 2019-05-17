@@ -1,6 +1,7 @@
 #include "mode_switcher.h"
 #include "../input_modes/drumset_mode.h"
 #include "../input_modes/simon_says_mode.h"
+#include "../input_modes/whack_a_color_mode.h"
 #include "../nfc_modes/card_erase_mode.h"
 #include "../nfc_modes/card_read_mode.h"
 #include "../classes/InputHandler.h"
@@ -51,6 +52,16 @@ namespace mode_switcher {
         }
     }
 
+    void whackAColorMode() {
+        if (
+                handler->greenButton->isPressedRaw() &&
+                handler->redButton->isPressedRaw() &&
+                handler->yellowButton->isPressedRaw()
+                ) {
+            whack_a_color_mode::startGame();
+        }
+    }
+
     void drumsetMode() {
         if (
                 handler->blueButton->isPressedRaw() &&
@@ -63,6 +74,7 @@ namespace mode_switcher {
     }
 
     void loop () {
+        whackAColorMode();
         simonSaysMode();
         cardEraseMode();
         escapeCardEraseMode();

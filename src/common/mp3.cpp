@@ -3,6 +3,7 @@
 #include <DFMiniMp3.h>
 #include "mp3.h"
 #include "../input_modes/player_mode.h"
+#include "./debug.h"
 #include "global.h"
 
 namespace mp3 {
@@ -12,70 +13,70 @@ namespace mp3 {
     void Mp3Notify::OnError(uint16_t returnValue) {
         switch (returnValue) {
             case DfMp3_Error_Busy:
-                Serial.print(F("busy"));
+                DEBUG_PRINT(F("busy"));
                 break;
             case DfMp3_Error_Sleeping:
-                Serial.print(F("sleep"));
+                DEBUG_PRINT(F("sleep"));
                 break;
             case DfMp3_Error_SerialWrongStack:
-                Serial.print(F("serial stack"));
+                DEBUG_PRINT(F("serial stack"));
                 break;
             case DfMp3_Error_CheckSumNotMatch:
-                Serial.print(F("checksum"));
+                DEBUG_PRINT(F("checksum"));
                 break;
             case DfMp3_Error_FileIndexOut:
-                Serial.print(F("file index"));
+                DEBUG_PRINT(F("file index"));
                 break;
             case DfMp3_Error_FileMismatch:
-                Serial.print(F("file mismatch"));
+                DEBUG_PRINT(F("file mismatch"));
                 break;
             case DfMp3_Error_Advertise:
-                Serial.print(F("advertise"));
+                DEBUG_PRINT(F("advertise"));
                 break;
             case DfMp3_Error_General:
-                Serial.print(F("general"));
+                DEBUG_PRINT(F("general"));
                 break;
             default:
-                Serial.print(F("unknown"));
+                DEBUG_PRINT(F("unknown"));
                 break;
         }
-        Serial.print(F(" error "));
-        Serial.println(returnValue);
+        DEBUG_PRINT(F(" error "));
+        DEBUG_PRINT(returnValue);
     }
 
     void Mp3Notify::OnPlayFinished(uint16_t returnValue) {
-        Serial.print(F("Finished playing track: ")); Serial.println(returnValue);
+        DEBUG_PRINT(F("Finished playing track: ")); DEBUG_PRINT(returnValue);
         if (global::playlist) { player_mode::nextTrack(); }
     }
 
     void Mp3Notify::OnCardOnline(uint16_t returnValue) {
-        Serial.print(F("sd online "));
-        Serial.println(returnValue);
+        DEBUG_PRINT(F("sd online "));
+        DEBUG_PRINT(returnValue);
     }
 
     void Mp3Notify::OnCardInserted(uint16_t returnValue) {
-        Serial.print(F("sd in "));
-        Serial.println(returnValue);
+        DEBUG_PRINT(F("sd in "));
+        DEBUG_PRINT(returnValue);
     }
 
     void Mp3Notify::OnCardRemoved(uint16_t returnValue) {
-        Serial.print(F("sd out "));
-        Serial.println(returnValue);
+        DEBUG_PRINT(F("sd out "));
+        DEBUG_PRINT(returnValue);
     }
 
     void Mp3Notify::OnUsbOnline(uint16_t returnValue) {
-        Serial.print(F("usb online "));
-        Serial.println(returnValue);
+        DEBUG_PRINT(F("usb online "));
+        DEBUG_PRINT(returnValue);
     }
 
     void Mp3Notify::OnUsbInserted(uint16_t returnValue) {
-        Serial.print(F("usb in "));
-        Serial.println(returnValue);
+        DEBUG_PRINT(F("usb in "));
+        DEBUG_PRINT(returnValue);
     }
 
     void Mp3Notify::OnUsbRemoved(uint16_t returnValue) {
-        Serial.print(F("usb out "));
-        Serial.println(returnValue);
+        DEBUG_PRINT(F("usb out "));
+        DEBUG_PRINT(returnValue);
     }
 
     void setup() {

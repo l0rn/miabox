@@ -4,7 +4,7 @@
 
 #include <AceButton.h>
 
-#define SIMON_SAYS_MAX 100
+#define SIMON_SAYS_MAX 30
 
 using namespace ace_button;
 

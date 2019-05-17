@@ -1,6 +1,7 @@
 #include <AceButton.h>
 #include "../classes/InputHandler.h"
 #include "../common/mp3.h"
+#include "../common/debug.h"
 #include "../common/global.h"
 #include "player_mode.h"
 
@@ -26,18 +27,31 @@ namespace player_mode {
     void handleBlue(AceButton *, uint8_t eventType, uint8_t) {
         switch (eventType) {
             case AceButton::kEventPressed:
-                Serial.println(F("Increasing volume"));
+                DEBUG_PRINT(F("Increasing volume"));
                 player.increaseVolume();
         }
     }
 
     void handleYellow(AceButton *, uint8_t eventType, uint8_t) {
+        switch (eventType) {
+            case AceButton::kEventPressed:
+                DEBUG_PRINT(F("Next track"));
+                player.nextTrack();
+        }
+    }
+
+    void handleWhite(AceButton*, uint8_t eventType, uint8_t) {
+        switch (eventType) {
+            case AceButton::kEventPressed:
+                DEBUG_PRINT(F("Previous track"));
+                player.prevTrack();
+        }
     }
 
     void handleGreen(AceButton *, uint8_t eventType, uint8_t) {
         switch (eventType) {
             case AceButton::kEventPressed:
-                Serial.println(F("Decreasing volume"));
+                DEBUG_PRINT(F("Decreasing volume"));
                 player.decreaseVolume();
         }
     }
@@ -58,7 +72,8 @@ namespace player_mode {
                 handleRed,
                 handleBlue,
                 handleYellow,
-                handleGreen
+                handleGreen,
+                handleWhite
         );
     }
 

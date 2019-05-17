@@ -1,6 +1,7 @@
 #include "nfc_mode.h"
-#include "../common/nfc.h"
-#include "../common/mp3.h"
+#include "./nfc.h"
+#include "./mp3.h"
+#include "./debug.h"
 #include "../nfc_modes/card_read_mode.h"
 #include "../assets/Assets.h"
 
@@ -19,10 +20,10 @@ namespace nfc_mode {
     void loop() {
         if (readerIsBlocked) return;
         if (reader.PICC_IsNewCardPresent() && reader.PICC_ReadCardSerial()) {
-            Serial.println(F("Card detected"));
+            DEBUG_PRINT(F("Card detected"));
             bool success = authenticateTag();
             if (!success) {
-                Serial.println("Card authentication error");
+                DEBUG_PRINT("Card authentication error");
                 closeTagConnection();
                 mp3::playMessageBlocking(CARD_WRITE_ERROR);
                 return;

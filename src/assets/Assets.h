@@ -15,3 +15,4 @@
 #define SIMON_WHITE 405
 #define SIMON_LOST 406
 #define SIMON_CORRECT 407
+#define WHACK_A_COLOR 500

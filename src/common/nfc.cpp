@@ -4,6 +4,7 @@
 #include "nfc.h"
 #include "input_mode.h"
 #include "../assets/Assets.h"
+#include "./debug.h"
 #include "utils.h"
 
 namespace nfc {
@@ -47,19 +48,19 @@ namespace nfc {
             piccType ==  MFRC522::PICC_TYPE_MIFARE_1K ||
             piccType == MFRC522::PICC_TYPE_MIFARE_4K
         ) {
-            Serial.println(F("Card is a mifare classic"));
+            DEBUG_PRINT(F("Card is a mifare classic"));
             success = readMifareClassic(nfcTagReadBuffer);
             if (!success) {
                 return false;
             }
         } else if (piccType == MFRC522::PICC_TYPE_MIFARE_UL) {
-            Serial.println(F("Card is a mifare UL"));
+            DEBUG_PRINT(F("Card is a mifare UL"));
             success = readMifareUL(nfcTagReadBuffer);
             if (!success) {
                 return false;
             }
         } else {
-            Serial.println(F("Card is unsupported"));
+            DEBUG_PRINT(F("Card is unsupported"));
             closeTagConnection();
             return false;
         }
@@ -85,19 +86,19 @@ namespace nfc {
             piccType ==  MFRC522::PICC_TYPE_MIFARE_1K ||
             piccType == MFRC522::PICC_TYPE_MIFARE_4K
                 ) {
-            Serial.println(F("Authenticating a mifare classic"));
+            DEBUG_PRINT(F("Authenticating a mifare classic"));
             piccStatus = authenticateMifareClassic();
         } else if (piccType == MFRC522::PICC_TYPE_MIFARE_UL) {
-            Serial.println(F("Authenticating a mifare UL"));
+            DEBUG_PRINT(F("Authenticating a mifare UL"));
             piccStatus = authenticateMifareUL();
         } else {
-            Serial.println(F("Card is unsupported"));
+            DEBUG_PRINT(F("Card is unsupported"));
             closeTagConnection();
             return false;
         }
         if (piccStatus == MFRC522::STATUS_OK) { return true; }
         else {
-            Serial.print("Card authentication failed: "); Serial.println(MFRC522::GetStatusCodeName(piccStatus));
+            DEBUG_PRINT("Card authentication failed: "); DEBUG_PRINT(MFRC522::GetStatusCodeName(piccStatus));
         }
     }
 
@@ -106,15 +107,15 @@ namespace nfc {
         uint8_t piccReadBuffer[NFC_READ_BUFFER_SIZE];
         uint8_t piccBufferSize = sizeof(piccReadBuffer);
         uint8_t classicBlock = 4;
-        Serial.println(F("Card authenticated"));
+        DEBUG_PRINT(F("Card authenticated"));
         // read 16 bytes from nfc tag (by default sector 1 / block 4)
         piccStatus = (MFRC522::StatusCode)reader.MIFARE_Read(classicBlock, piccReadBuffer, &piccBufferSize);
         if (piccStatus == MFRC522::STATUS_OK) {
-            Serial.println(F("Card read to buffer"));
+            DEBUG_PRINT(F("Card read to buffer"));
             memcpy(nfcTagReadBuffer, piccReadBuffer, NFC_READ_BUFFER_SIZE);
             return true;
         } else {
-            Serial.print("MIFARE_read failed with status: "); Serial.print((uint8_t)piccStatus); Serial.print("\n");
+            DEBUG_PRINT("MIFARE_read failed with status: "); DEBUG_PRINT((uint8_t)piccStatus); Serial.print("\n");
             return false;
         }
     }
@@ -135,7 +136,7 @@ namespace nfc {
             }
             else {
                 success = false;
-                Serial.print("Reading Mifare UL failed with: ");Serial.println(reader.GetStatusCodeName(piccStatus));
+                DEBUG_PRINT("Reading Mifare UL failed with: ");DEBUG_PRINT(reader.GetStatusCodeName(piccStatus));
                 break;
             }
         }
@@ -152,7 +153,7 @@ namespace nfc {
         if (piccStatus == MFRC522::STATUS_OK) {
            return true;
         } else {
-            Serial.print("Card write failed with status: "); Serial.println(reader.GetStatusCodeName(piccStatus));
+            DEBUG_PRINT("Card write failed with status: "); DEBUG_PRINT(reader.GetStatusCodeName(piccStatus));
             return false;
         }
     }
@@ -170,7 +171,7 @@ namespace nfc {
             if (piccStatus == MFRC522::STATUS_OK) success = true;
             else {
                 success = false;
-                Serial.print("Writing to mifare UL failed with: "); Serial.println(reader.GetStatusCodeName(piccStatus));
+                DEBUG_PRINT("Writing to mifare UL failed with: "); DEBUG_PRINT(reader.GetStatusCodeName(piccStatus));
                 break;
             }
         }
@@ -194,7 +195,7 @@ namespace nfc {
         } else if (piccType == MFRC522::PICC_TYPE_MIFARE_UL) {
             success = writeMifareUL(nfcTagWriteBuffer);
         } else {
-            Serial.println(F("Unsupported card Type"));
+            DEBUG_PRINT(F("Unsupported card Type"));
         }
         return success;
     }

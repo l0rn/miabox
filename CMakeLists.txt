@@ -17,6 +17,7 @@ add_arduino_executable(Miabox
         src/input_modes/card_select_mode.cpp
         src/input_modes/player_mode.cpp
         src/input_modes/simon_says_mode.cpp
+        src/input_modes/whack_a_color_mode.cpp
         src/nfc_modes/card_erase_mode.cpp
         src/nfc_modes/card_read_mode.cpp
         src/classes/InputHandler.cpp

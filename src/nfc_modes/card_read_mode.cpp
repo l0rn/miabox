@@ -1,6 +1,7 @@
 #include "../common/nfc.h"
 #include "../common/mp3.h"
 #include "../common/input_mode.h"
+#include "../common/debug.h"
 #include "../input_modes/card_select_mode.h"
 #include "../input_modes/player_mode.h"
 #include "../assets/Assets.h"
@@ -20,7 +21,7 @@ namespace card_read_mode {
         }
         if (tag.newCard) {
             mp3::playMessageNonBlocking(NEW_CARD);
-            Serial.println("Setting up new card");
+            DEBUG_PRINT("Setting up new card");
             readerIsBlocked = true;
             card_select_mode::newCard();
         } else {
